@@ -9,23 +9,25 @@
 import UIKit
 
 class AudioAPIManager: NSObject {
-    static let sharedInstance = AudioAPIManager();
     
+    let sharedInstance = AudioAPIManager();
     let localURL = "http://localhost:8000/";
+    var playlist:Array<Audio> = [];
     
     //GET request to API : GET all audio file
-    func getAllPlaylist() {
+    func getAllPlaylist(){
         let allplaylistURL = localURL+"playlist";
         guard let url = URL(string: allplaylistURL)else{
             print("Error: cannot create URL");
-            return
+            return;
         }
         
-        getHTTPRequest(requestURL: url);
+        playlist = getHTTPRequest(requestURL: url);
+        
     }
     
     //GET request to API
-    func getHTTPRequest(requestURL: URL) {
+    func getHTTPRequest(requestURL: URL) -> Array<Audio>{
         
         let config = URLSessionConfiguration.default;
         let session = URLSession(configuration: config);
@@ -59,9 +61,10 @@ class AudioAPIManager: NSObject {
                                         //Create Audio Object from JSON result
                                         //Push it to an Array of Audio Object
                                         let audio = Audio(audioId: id, audioData: data);
+                                        
                                         audioArray.append(audio);
                                         
-                                        print(audioArray[0].audioData);
+                                        //print(audioArray[0].audioData);
                                     }
                                     
                                 }
@@ -78,8 +81,6 @@ class AudioAPIManager: NSObject {
         });
         
         task.resume();
-        
-        
-        
+        return audioArray;
     }
 }
