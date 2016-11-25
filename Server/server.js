@@ -18,7 +18,6 @@ app.get('/', function(req, res) {
 app.get('/playlist', function(req, res) {
 
 	readFile (playlistFolder,encoder,res);
-	//res.send({"hello" :"hello"});
 });
 
 app.get('/playlist/:name', function(req, res) {
@@ -50,10 +49,7 @@ function readFile(folder, encoder, response){
 			'm_data' : encodedFile[i]
 			});
 		};
-		//response.json({"hello" :"hello"});
-		//response.json({"list" : [{"hello":"hello"},{"hello":"hello"}]});
 		response.json(jsonList);
-		//response.end();
 	});
 }
 
