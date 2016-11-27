@@ -10,7 +10,7 @@ import UIKit
 
 class AudioAPIManager: NSObject {
     
-    let sharedInstance = AudioAPIManager();
+    //let sharedInstance = AudioAPIManager();
     let localURL = "http://localhost:8000/";
     var playlist:Array<Audio> = [];
     
@@ -64,7 +64,7 @@ class AudioAPIManager: NSObject {
                                         
                                         audioArray.append(audio);
                                         
-                                        //print(audioArray[0].audioData);
+                                        audio.decodeBase64String(base64String: audioArray[0].audioData);
                                     }
                                     
                                 }

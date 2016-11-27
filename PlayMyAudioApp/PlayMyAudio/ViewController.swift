@@ -9,12 +9,9 @@
 import UIKit
 
 class ViewController: UIViewController {
-    let audioManager = AudioAPIManager();
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        audioManager.getAllPlaylist();
     }
 
     override func didReceiveMemoryWarning() {
