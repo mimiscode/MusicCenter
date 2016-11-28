@@ -7,9 +7,14 @@
 //
 
 import UIKit
+import AVFoundation
 
 class AudioTableViewCell: UITableViewCell {
-
+    
+    var player: AVAudioPlayer?
+    var varPlay: Data?
+    @IBOutlet weak var idTrack: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -21,7 +26,12 @@ class AudioTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    @IBAction func actionPlayBtn(_ sender: AnyObject) {
-        
+    @IBAction func actionPlay(_ sender: UIButton) {
+        if let player = try?AVAudioPlayer(data: self.varPlay!) {
+            player.play();
+            player.numberOfLoops = -1
+            //player.currentTime = 2 // décalage du son de 2 secondes
+            self.player = player
+        }
     }
 }
